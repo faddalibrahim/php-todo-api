@@ -38,28 +38,39 @@ if(isPostRequest()){
 
     $payload = getPayload();
 
+
     // check if payload is empty
+    if(!$payload) exit(json_encode(EMPTY_PAYLOAD));
+    
 
-    // check if payload contains expected keys
+    // contains expected keys
+    if(!array_key_exists(TASK, $payload)) exit(json_encode(UNEXPECTED_PAYLOAD));
 
 
-    exit(addTodo($payload['task'], $payload['status']));
+    exit(createTodo($payload['task']));
 }
 
 
 // DELETE REQUESTS
-if($_SERVER[REQUEST_METHOD] === DELETE){
+if(isDeleteRequest()){
 
     $payload = getPayload();
-    exit(deleteBus($payload["bus_id"]));
+
+    // check if payload is empty
+    if(!$payload) exit(json_encode(EMPTY_PAYLOAD));
+    
+    // contains expected keys
+    if(!array_key_exists(ID, $payload)) exit(json_encode(UNEXPECTED_PAYLOAD));
+
+    exit(deleteTodo($payload[ID]));
 }
 
 // PUT REQUESTS
 
-if($_SERVER[REQUEST_METHOD] === PUT){
+if(isPutRequest()){
     $payload = getPayload();
     
-    echo updateBus($payload["bus_id"],$payload["bus_no"],$payload["start_loc"],$payload["destination"],$payload["departure_time"],$payload["arrival_time"],$payload["capacity"],$payload["availability"]);
+    echo updateTodo($payload[ID],$payload[STATUS]);
     
 }
 

@@ -57,10 +57,10 @@ function getTodo($id){
 }
 
 
-function createTodo($task, $status){
+function createTodo($task){
 
     $todo = new Todo();
-    $result = $todo->createTodo($task, $status);
+    $result = $todo->createTodo($task);
 
     return $result;
 
@@ -69,7 +69,7 @@ function createTodo($task, $status){
 function deleteTodo($id){
 
     $todo = new Todo();
-    $result = $todo->deleteTodo($todo_id);
+    $result = $todo->deleteTodo($id);
 
     return $result;
 }
