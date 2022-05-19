@@ -19,17 +19,17 @@ vanilla php (with pdo) + mysql api for a todo application
 
 **PATCH / PUT**
 
-| route         | action                                  |
-| ------------- | --------------------------------------- |
-| /todos?id=$id | update/patch todo with corresponding id |
+| route  | action                                             |
+| ------ | -------------------------------------------------- |
+| /todos | update/patch todo with corresponding id in payload |
 
 **DELETE**
 
-| route         | action                            |
-| ------------- | --------------------------------- |
-| /todos?id=$id | delete todo with corresponding id |
+| route  | action                                       |
+| ------ | -------------------------------------------- |
+| /todos | delete todo with corresponding id in payload |
 
 ## Important checklists
 
-- [ ] versioning
+- [ x ] versioning
 - [ ] health route
