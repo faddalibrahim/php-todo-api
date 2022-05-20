@@ -16,13 +16,13 @@ class Todo extends Database {
         return array('todo'=>'welcome to the todo api');
     }
 
-    private function checkDbConnection(){
+    private function connectToDb(){
         if(!$this->connect()) exit(json_encode($this->connection_error));
     }
 
     public function getAllTodos(){
 
-        $this->checkDbConnection();
+        $this->connectToDb();
 
         $sql = "SELECT * from $this->table";
         $stmt = $this->conn->prepare($sql);
@@ -32,7 +32,7 @@ class Todo extends Database {
     }
 
     public function getTodo($id){
-        $this->checkDbConnection();
+        $this->connectToDb();
 
         $sql = "SELECT * from $this->table WHERE id=$id";
         $stmt = $this->conn->prepare($sql);
@@ -41,9 +41,21 @@ class Todo extends Database {
         return $stmt;
     }
 
+    public function searchTodos($searchTerm){
+        $this->connectToDb();
+
+        $sql = "SELECT * from $this->table WHERE task LIKE '%$searchTerm%' OR 
+                                                status LIKE '%$searchTerm%' OR 
+                                                created_at LIKE '%$searchTerm%'";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+
+        return $stmt;
+    }
+
     public function createTodo($task){
 
-        $this->checkDbConnection();
+        $this->connectToDb();
 
         $sql = "INSERT INTO $this->table (task) VALUES(:task)";
 		$stmt = $this->conn->prepare($sql);
@@ -57,7 +69,7 @@ class Todo extends Database {
     }
 
     public function deleteTodo($id){
-        $this->checkDbConnection();
+        $this->connectToDb();
 
         // sql to delete a record
         $sql = "DELETE FROM $this->table WHERE id=:id";
@@ -84,7 +96,7 @@ class Todo extends Database {
      */
     public function updateTodo($id, $task, $status){
 
-        $this->checkDbConnection();
+        $this->connectToDb();
       
         $sql = "UPDATE $this->table SET task=:task, status=:status WHERE id=$id";
 		$stmt = $this->conn->prepare($sql);

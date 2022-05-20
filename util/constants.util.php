@@ -13,6 +13,8 @@ define('ID','id');
 define('TASK','task');
 define('STATUS','status');
 
+define('SEARCH','search');
+
 // error responses
 define('INVALID_ID', array('ok' => false, 'message' => 'invalid id'));
 define('UNEXPECTED_KEY', array('ok' => false, 'message' =>'unexpected key'));

@@ -55,6 +55,30 @@ function getTodo($id){
     return json_encode(array('data' => $todo));
 }
 
+function searchTodos($param){
+    $todo = new Todo();
+    $stmt = $todo->searchTodos($param);
+
+    if (!$stmt->rowCount()) exit(json_encode(array('ok' => false, 'data' => array())));
+
+    $resulting_todos = array('ok' => true, 'todos' => array());
+
+    while($data = $stmt->fetch()){
+        extract($data);
+
+        $todo = array(
+            'id' => $id,
+            'task' => $task,
+            'status' => $status,
+            'created_at' => $created_at
+        );
+
+        array_push($resulting_todos['todos'],$todo);
+    }
+
+    return json_encode(array('data' => $resulting_todos));
+}
+
 
 function createTodo($task){
 

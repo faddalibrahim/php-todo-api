@@ -6,10 +6,11 @@ vanilla php (with pdo) + mysql api for a todo application
 
 **GET**
 
-| route         | action                            |
-| ------------- | --------------------------------- |
-| /todos        | fetch all todos                   |
-| /todos?id=$id | fetch todo with the correspong id |
+| route               | action                                          |
+| ------------------- | ----------------------------------------------- |
+| /todos              | fetch all todos                                 |
+| /todos?id=$id       | fetch todo with the correspong id               |
+| /todos?search=$term | fetch all todos with the correspong search term |
 
 **POST**
 
@@ -36,4 +37,5 @@ vanilla php (with pdo) + mysql api for a todo application
 
 ## Tips
 
-[how to design better apis](https://r.bluethl.net/how-to-design-better-apis)
+[how to design better apis](https://r.bluethl.net/how-to-design-better-apis)  
+[php proper documentation](https://flaviocopes.com/php-proper-documentation/)
