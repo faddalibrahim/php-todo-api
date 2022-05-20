@@ -33,3 +33,7 @@ vanilla php (with pdo) + mysql api for a todo application
 
 - [x] versioning
 - [ ] health route
+
+## Tips
+
+[how to design better apis](https://r.bluethl.net/how-to-design-better-apis)
