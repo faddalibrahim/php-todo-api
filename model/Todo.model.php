@@ -3,8 +3,9 @@
 require_once(__DIR__."/../config/database.config.php");
 
 /**
+ * The Todo Model
  * 
- * Comments
+ * @author Faddal Ibrahim
  * 
  */
 class Todo extends Database {
@@ -72,7 +73,15 @@ class Todo extends Database {
         }
     }
   
-
+    /**
+     * this model performs update queries on the database
+     * 
+     * @param string {id} the id of the todo item to be updated
+     * @param string { task } the new task to replace the current one
+     * @param string { status } the new status of the todo
+     * 
+     * @return success or failed message
+     */
     public function updateTodo($id, $task, $status){
 
         $this->checkDbConnection();

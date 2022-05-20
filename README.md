@@ -31,5 +31,5 @@ vanilla php (with pdo) + mysql api for a todo application
 
 ## Important checklists
 
-- [ x ] versioning
+- [x] versioning
 - [ ] health route
