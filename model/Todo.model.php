@@ -15,8 +15,13 @@ class Todo extends Database {
         return array('todo'=>'welcome to the todo api');
     }
 
+    private function checkDbConnection(){
+        if(!$this->connect()) exit(json_encode($this->connection_error));
+    }
+
     public function getAllTodos(){
-        if(!$this->connect()) return;
+
+        $this->checkDbConnection();
 
         $sql = "SELECT * from $this->table";
         $stmt = $this->conn->prepare($sql);
@@ -26,7 +31,7 @@ class Todo extends Database {
     }
 
     public function getTodo($id){
-        if(!$this->connect()) return;
+        $this->checkDbConnection();
 
         $sql = "SELECT * from $this->table WHERE id=$id";
         $stmt = $this->conn->prepare($sql);
@@ -37,7 +42,7 @@ class Todo extends Database {
 
     public function createTodo($task){
 
-        if(!$this->connect()) return;
+        $this->checkDbConnection();
 
         $sql = "INSERT INTO $this->table (task) VALUES(:task)";
 		$stmt = $this->conn->prepare($sql);
@@ -51,7 +56,7 @@ class Todo extends Database {
     }
 
     public function deleteTodo($id){
-        if(!$this->connect()) return;
+        $this->checkDbConnection();
 
         // sql to delete a record
         $sql = "DELETE FROM $this->table WHERE id=:id";
@@ -70,7 +75,7 @@ class Todo extends Database {
 
     public function updateTodo($id, $task, $status){
 
-        if(!$this->connect()) return;
+        $this->checkDbConnection();
       
         $sql = "UPDATE $this->table SET task=:task, status=:status WHERE id=$id";
 		$stmt = $this->conn->prepare($sql);

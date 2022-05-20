@@ -9,7 +9,6 @@
 		private $name = DB_NAME;
 		protected $conn;
 		protected $connection_error;
-		protected $connection_success;
 		
 		protected function connect(){
 			$this->conn = null;
