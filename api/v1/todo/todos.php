@@ -59,8 +59,10 @@ if(isDeleteRequest()){
     // check if payload is empty
     if(!$payload) exit(json_encode(EMPTY_PAYLOAD));
     
-    // contains expected keys
-    if(!array_key_exists(ID, $payload)) exit(json_encode(UNEXPECTED_PAYLOAD));
+    // contains expected keys/values
+    if(!array_key_exists(ID, $payload) or !is_numeric($payload[ID])) 
+        exit(json_encode(UNEXPECTED_PAYLOAD));
+    
 
     exit(deleteTodo($payload[ID]));
 }
