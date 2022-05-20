@@ -72,7 +72,7 @@ class Todo extends Database {
 
         if(!$this->connect()) return;
       
-        $sql = "UPDATE $this->table SET task=:task status=:status WHERE id=$id";
+        $sql = "UPDATE $this->table SET task=:task, status=:status WHERE id=$id";
 		$stmt = $this->conn->prepare($sql);
 
         $stmt->bindParam(':task', $task);

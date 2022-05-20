@@ -72,7 +72,7 @@ if(isDeleteRequest()){
 if(isPutRequest()){
     $payload = getPayload();
     
-    echo updateTodo($payload[ID],$payload[STATUS]);
+    echo updateTodo($payload[ID], $payload[TASK], $payload[STATUS]);
     
 }
 
