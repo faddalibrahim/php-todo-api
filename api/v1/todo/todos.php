@@ -36,18 +36,6 @@ if(isGetRequest()){
                 exit(json_encode(UNEXPECTED_KEY)) :  exit(getAllTodos());
     }
 
-    // // id key is present
-    // if(isset($_GET[ID])){
-
-        // (empty($_GET[ID]) or !is_numeric($_GET[ID])) ?
-        //             exit(json_encode(INVALID_ID)):  exit(getTodo($_GET[ID]));
-    // }
-
-    // // id key not present
-    count($_GET) ? 
-        // different key present             no key at all
-        exit(json_encode(UNEXPECTED_KEY)) :  exit(getAllTodos());
-
 }
 
 // POST REQUESTS

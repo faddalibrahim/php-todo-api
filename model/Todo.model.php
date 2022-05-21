@@ -3,57 +3,94 @@
 require_once(__DIR__."/../config/database.config.php");
 
 /**
- * The Todo Model
+ * Model for making queries to the database
  * 
  * @author Faddal Ibrahim
  * 
  */
+
 class Todo extends Database {
     private $table = "todo";
 
-    function todoTest(){
-        if(!$this->connect()) return $this->connection_error;
-        return array('todo'=>'welcome to the todo api');
-    }
+    /**
+     * makes connection to database
+     * 
+     * if connection is unsuccessful, cuts off and returns the connection error
+     * it is called in every method that queries the database
+     * 
+     */
 
     private function connectToDb(){
         if(!$this->connect()) exit(json_encode($this->connection_error));
     }
 
+     /**
+     * helper method to for making SELECT queries
+     * 
+     * @param string { sql } the id of the todo item to be deleted
+     * 
+     * @return pdo statement object
+     */
+
+    private function makeSelectQuery($sql){
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt;
+    }
+
+     /**
+     * fetches all todos
+     * 
+     * @return query statement
+     */
+
     public function getAllTodos(){
-
         $this->connectToDb();
-
-        $sql = "SELECT * from $this->table";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
-
-        return $stmt;
+        return $this->makeSelectQuery("SELECT * from $this->table");
     }
 
-    public function getTodo($id){
+     /**
+     * fetches todo with the corresponding id
+     * 
+     * @param int { id } the id of the todo item to be deleted
+     * 
+     * @return success or failed message
+     */
+
+    public function getTodo(int $id){
         $this->connectToDb();
-
-        $sql = "SELECT * from $this->table WHERE id=$id";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
-
-        return $stmt;
+        return $this->makeSelectQuery("SELECT * from $this->table WHERE id=$id");
+      
     }
 
-    public function searchTodos($searchTerm){
+     /**
+     * searches database for search term
+     * 
+     * @param string { searchTerm } the id of the todo item to be deleted
+     * 
+     * @return success or failed message
+     */
+
+    public function searchTodos(string $searchTerm){
         $this->connectToDb();
 
-        $sql = "SELECT * from $this->table WHERE task LIKE '%$searchTerm%' OR 
-                                                status LIKE '%$searchTerm%' OR 
-                                                created_at LIKE '%$searchTerm%'";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
+        $sql = "SELECT * from $this->table 
+                WHERE task LIKE '%$searchTerm%' 
+                OR status LIKE '%$searchTerm%' 
+                OR created_at LIKE '%$searchTerm%'";
 
-        return $stmt;
+       return $this->makeSelectQuery($sql);
     }
 
-    public function createTodo($task){
+     /**
+     * creates a new todo
+     * 
+     * @param string { task } the id of the todo item to be deleted
+     * 
+     * @return success or failed message
+     */
+
+    public function createTodo(string $task){
 
         $this->connectToDb();
 
@@ -68,7 +105,15 @@ class Todo extends Database {
             return json_encode(array('ok' => false, 'message' => 'failed to add todo'));
     }
 
-    public function deleteTodo($id){
+     /**
+     * this model performs delete queries on the database
+     * 
+     * @param int {id} the id of the todo item to be deleted
+     * 
+     * @return success or failed message
+     */
+
+    public function deleteTodo(int $id){
         $this->connectToDb();
 
         // sql to delete a record
@@ -88,13 +133,14 @@ class Todo extends Database {
     /**
      * this model performs update queries on the database
      * 
-     * @param string {id} the id of the todo item to be updated
+     * @param int {id} the id of the todo item to be updated
      * @param string { task } the new task to replace the current one
      * @param string { status } the new status of the todo
      * 
      * @return success or failed message
      */
-    public function updateTodo($id, $task, $status){
+
+    public function updateTodo(int $id, string $task, string $status){
 
         $this->connectToDb();
       
