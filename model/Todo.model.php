@@ -20,7 +20,7 @@ class Todo extends Database {
      * 
      */
 
-    private function connectToDb(){
+    private function connectToDb() : void {
         if(!$this->connect()) exit(json_encode($this->connection_error));
     }
 
@@ -32,7 +32,7 @@ class Todo extends Database {
      * @return pdo statement object
      */
 
-    private function makeSelectQuery($sql){
+    private function makeSelectQuery($sql) : object {
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt;
@@ -44,7 +44,7 @@ class Todo extends Database {
      * @return query statement
      */
 
-    public function getAllTodos(){
+    public function getAllTodos() : object {
         $this->connectToDb();
         return $this->makeSelectQuery("SELECT * from $this->table");
     }
@@ -57,7 +57,7 @@ class Todo extends Database {
      * @return success or failed message
      */
 
-    public function getTodo(int $id){
+    public function getTodo(int $id) : object {
         $this->connectToDb();
         return $this->makeSelectQuery("SELECT * from $this->table WHERE id=$id");
     }
@@ -70,7 +70,7 @@ class Todo extends Database {
      * @return success or failed message
      */
 
-    public function searchTodos(string $searchTerm){
+    public function searchTodos(string $searchTerm) : object {
         $this->connectToDb();
 
         $sql = "SELECT * from $this->table 
@@ -89,7 +89,7 @@ class Todo extends Database {
      * @return success or failed message
      */
 
-    public function createTodo(string $task){
+    public function createTodo(string $task) : array {
 
         $this->connectToDb();
 
@@ -112,7 +112,7 @@ class Todo extends Database {
      * @return success or failed message
      */
 
-    public function deleteTodo(int $id){
+    public function deleteTodo(int $id) : array {
         $this->connectToDb();
 
         // sql to delete a record
@@ -139,7 +139,7 @@ class Todo extends Database {
      * @return success or failed message
      */
 
-    public function updateTodo(int $id, string $task, string $status){
+    public function updateTodo(int $id, string $task, string $status) : array {
 
         $this->connectToDb();
       
