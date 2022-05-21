@@ -52,13 +52,14 @@ if(isPostRequest()){
     if(!array_key_exists(TASK, $payload)) exit(json_encode(UNEXPECTED_PAYLOAD));
 
 
-    exit(createTodo($payload['task']));
+
+    sendResponse(createTodo($payload[TASK]));
 }
 
 
 // DELETE REQUESTS
 if(isDeleteRequest()){
-
+    
     $payload = getPayload();
 
     // check if payload is empty
@@ -66,10 +67,10 @@ if(isDeleteRequest()){
     
     // contains expected keys/values
     if(!array_key_exists(ID, $payload) or !is_numeric($payload[ID])) 
-        exit(json_encode(UNEXPECTED_PAYLOAD));
+    exit(json_encode(UNEXPECTED_PAYLOAD));
     
 
-    exit(deleteTodo($payload[ID]));
+    sendResponse(deleteTodo($payload[ID]));
 }
 
 // PUT REQUESTS
@@ -77,8 +78,8 @@ if(isDeleteRequest()){
 if(isPutRequest()){
     $payload = getPayload();
     
-    echo updateTodo($payload[ID], $payload[TASK], $payload[STATUS]);
-    
+    sendResponse(updateTodo($payload[ID], $payload[TASK], $payload[STATUS]));
+
 }
 
 

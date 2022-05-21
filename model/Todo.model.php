@@ -60,7 +60,6 @@ class Todo extends Database {
     public function getTodo(int $id){
         $this->connectToDb();
         return $this->makeSelectQuery("SELECT * from $this->table WHERE id=$id");
-      
     }
 
      /**
@@ -100,9 +99,9 @@ class Todo extends Database {
         $stmt->bindParam(':task', $task);
 
         if($stmt->execute()) 
-            return json_encode(array('ok' => true, 'message' => 'todo was successfully added'));
+            return array('ok' => true, 'message' => 'todo was successfully added');
         else
-            return json_encode(array('ok' => false, 'message' => 'failed to add todo'));
+            return array('ok' => false, 'message' => 'failed to add todo');
     }
 
      /**
@@ -124,9 +123,9 @@ class Todo extends Database {
         $stmt->bindParam(':id', $id);
 
         if($stmt->execute())
-            return json_encode(array('ok' => true, 'message' => 'todo was successfully deleted'));
+            return array('ok' => true, 'message' => 'todo was successfully deleted');
         else{
-            return json_encode(array('ok' => false, 'message' => 'failed to delete todo'));
+            return array('ok' => false, 'message' => 'failed to delete todo');
         }
     }
   
@@ -151,9 +150,9 @@ class Todo extends Database {
         $stmt->bindParam(':status', $status);
 
         if($stmt->execute())
-            return json_encode(array('ok' => true, 'message' => 'todo was successfully updated'));
+            return array('ok' => true, 'message' => 'todo was successfully updated');
         else
-            return json_encode(array('ok' => false, 'message' => 'failed to update todo'));
+            return array('ok' => false, 'message' => 'failed to update todo');
     }
 
 }

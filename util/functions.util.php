@@ -20,5 +20,9 @@ function isDeleteRequest() {
     return $_SERVER[REQUEST_METHOD] === DELETE;
 }
 
+function sendResponse($response){
+    exit(json_encode($response));
+}
+
 
 ?>
