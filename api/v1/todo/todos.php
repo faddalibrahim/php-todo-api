@@ -25,15 +25,15 @@ if(isGetRequest()){
     switch($param){
         case ID:
             (empty($_GET[ID]) or !is_numeric($_GET[ID])) ?
-                exit(json_encode(INVALID_ID)):  exit(getTodo($_GET[ID]));
+                sendResponse((INVALID_ID)):  sendResponse(getTodo($_GET[ID]));
             break;
         case SEARCH:
-            exit(searchTodos($_GET[$param]));
+            sendResponse(searchTodos($_GET[$param]));
             break;
         default:
             count($_GET) ? 
                 // different key present             no key at all
-                exit(json_encode(UNEXPECTED_KEY)) :  exit(getAllTodos());
+                sendResponse(UNEXPECTED_KEY) :  sendResponse(getAllTodos());
     }
 
 }

@@ -11,7 +11,7 @@ function getAllTodos(){
     $todo = new Todo();
     $stmt = $todo->getAllTodos();
 
-    if (!$stmt->rowCount()) exit(json_encode(array('ok' => false, 'data' => array())));
+    if (!$stmt->rowCount()) return array('ok' => false, 'data' => array());
 
     $all_todos = array('ok' => true, 'todos' => array());
 
@@ -28,14 +28,14 @@ function getAllTodos(){
         array_push($all_todos['todos'],$todo);
     }
 
-    return json_encode(array('data' => $all_todos));
+    return array('data' => $all_todos);
 }
 
 function getTodo($id){
     $todo = new Todo();
     $stmt = $todo->getTodo($id);
 
-    if (!$stmt->rowCount()) return json_encode(array('ok' => false, 'message' => "no such todo"));
+    if (!$stmt->rowCount()) return array('ok' => false, 'message' => "no such todo");
 
     $todo = array('ok' => true, 'todo' => null);
 
@@ -52,14 +52,14 @@ function getTodo($id){
         $todo['todo'] = $one_todo;
     }
 
-    return json_encode(array('data' => $todo));
+    return array('data' => $todo);
 }
 
 function searchTodos($param){
     $todo = new Todo();
     $stmt = $todo->searchTodos($param);
 
-    if (!$stmt->rowCount()) exit(json_encode(array('ok' => false, 'data' => array())));
+    if (!$stmt->rowCount()) return array('ok' => false, 'data' => array());
 
     $resulting_todos = array('ok' => true, 'todos' => array());
 
@@ -76,7 +76,7 @@ function searchTodos($param){
         array_push($resulting_todos['todos'],$todo);
     }
 
-    return json_encode(array('data' => $resulting_todos));
+    return array('data' => $resulting_todos);
 }
 
 
