@@ -2,11 +2,6 @@
 
 require_once(__DIR__."/../model/Todo.model.php");
 
-function runTodoTest(){
-    $todo = new Todo();
-    return $todo->todoTest();
-}
-
 function getAllTodos(){
     $todo = new Todo();
     $stmt = $todo->getAllTodos();
