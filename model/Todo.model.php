@@ -12,6 +12,10 @@ require_once(__DIR__."/../config/database.config.php");
 class Todo extends Database {
     private $table = "todo";
 
+    public function healthDB(){
+        return $this->connect() !== null;
+    }
+
     /**
      * makes connection to database
      * 
