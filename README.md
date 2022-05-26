@@ -33,9 +33,10 @@ vanilla php (with pdo) + mysql api for a todo application
 ## Important checklists
 
 - [x] versioning
-- [ ] health route
+- [x] health route
 
 ## Tips
 
 [how to design better apis](https://r.bluethl.net/how-to-design-better-apis)  
-[php proper documentation](https://flaviocopes.com/php-proper-documentation/)
+[php proper documentation](https://flaviocopes.com/php-proper-documentation/)  
+[document apis](https://app.swaggerhub.com/home)
