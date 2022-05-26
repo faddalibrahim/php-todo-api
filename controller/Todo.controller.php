@@ -1,6 +1,6 @@
 <?php
 
-require_once(__DIR__."/../model/Todo.model.php");
+require_once(__DIR__."/../util/autoloader.util.php");
 
 function getAllTodos(){
     $todo = new Todo();
