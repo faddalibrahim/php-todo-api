@@ -56,7 +56,7 @@ function isDeleteRequest() {
  * @param array { response } the response to be sent to the client
  */
 
-function sendResponse($response){
+function sendResponse(array $response):void{
     exit(json_encode($response));
 }
 
@@ -66,7 +66,7 @@ function sendResponse($response){
  * @param int { code } the response code
  */
 
-function setResponseCode($code){
+function setResponseCode(int $code):void{
     http_response_code($code);
 }
 

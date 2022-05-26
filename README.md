@@ -39,10 +39,13 @@ vanilla php (with pdo) + mysql api for a todo application
 - [x] autoloader
 - [x] swagger docs
 - [x] .htaccess file
+- [x] .env
 - [x] error handling
 
 ## Tips
 
 [how to design better apis](https://r.bluethl.net/how-to-design-better-apis)  
 [php proper documentation](https://flaviocopes.com/php-proper-documentation/)  
-[document with swagger](https://app.swaggerhub.com/home)
+[document with swagger](https://app.swaggerhub.com/home)  
+[.env](https://www.youtube.com/watch?v=txGL-Ld9zD8)  
+[.htaccess](https://www.youtube.com/watch?v=aU48yQHh9q4)
