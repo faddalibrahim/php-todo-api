@@ -45,14 +45,17 @@ if(isPostRequest()){
 
 
     // check if payload is empty
-    if(!$payload) exit(json_encode(EMPTY_PAYLOAD));
+    if(!$payload) {
+        http_response_code(400);
+        exit(json_encode(EMPTY_PAYLOAD));
+    }
     
 
     // contains expected keys
     if(!array_key_exists(TASK, $payload)) exit(json_encode(UNEXPECTED_PAYLOAD));
 
 
-
+    http_response_code(201);
     sendResponse(createTodo($payload[TASK]));
 }
 
@@ -63,11 +66,17 @@ if(isDeleteRequest()){
     $payload = getPayload();
 
     // check if payload is empty
-    if(!$payload) exit(json_encode(EMPTY_PAYLOAD));
+    if(!$payload) {
+        http_response_code(400);
+        exit(json_encode(EMPTY_PAYLOAD));
+    }
     
     // contains expected keys/values
-    if(!array_key_exists(ID, $payload) or !is_numeric($payload[ID])) 
-    exit(json_encode(UNEXPECTED_PAYLOAD));
+    if(!array_key_exists(ID, $payload) or !is_numeric($payload[ID])) {
+        // bad request
+        http_response_code(400);
+        exit(json_encode(UNEXPECTED_PAYLOAD));
+    }
     
 
     sendResponse(deleteTodo($payload[ID]));
@@ -78,6 +87,7 @@ if(isDeleteRequest()){
 if(isPutRequest()){
     $payload = getPayload();
     
+    http_response_code(201);
     sendResponse(updateTodo($payload[ID], $payload[TASK], $payload[STATUS]));
 
 }

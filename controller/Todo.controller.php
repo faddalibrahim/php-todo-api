@@ -30,7 +30,10 @@ function getTodo($id){
     $todo = new Todo();
     $stmt = $todo->getTodo($id);
 
-    if (!$stmt->rowCount()) return array('ok' => false, 'message' => "no such todo");
+    if (!$stmt->rowCount()) {
+        http_response_code(404);
+        return array('ok' => false, 'message' => "no such todo");
+    }
 
     $todo = array('ok' => true, 'todo' => null);
 
@@ -54,7 +57,10 @@ function searchTodos($param){
     $todo = new Todo();
     $stmt = $todo->searchTodos($param);
 
-    if (!$stmt->rowCount()) return array('ok' => false, 'data' => array());
+    if (!$stmt->rowCount()) {
+        http_response_code(404);
+        return array('ok' => false, 'data' => array());
+    }
 
     $resulting_todos = array('ok' => true, 'todos' => array());
 
