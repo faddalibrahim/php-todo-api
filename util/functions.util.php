@@ -60,5 +60,15 @@ function sendResponse($response){
     exit(json_encode($response));
 }
 
+/**
+ * sets the appropriate response code for each request
+ * 
+ * @param int { code } the response code
+ */
+
+function setResponseCode($code){
+    http_response_code($code);
+}
+
 
 ?>

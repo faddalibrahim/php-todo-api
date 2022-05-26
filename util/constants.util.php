@@ -21,5 +21,11 @@ define('UNEXPECTED_KEY', array('ok' => false, 'message' =>'unexpected key'));
 define('EMPTY_PAYLOAD', array('ok' => false, 'message' =>'payload is empty'));
 define('UNEXPECTED_PAYLOAD', array('ok' => false, 'message' =>'payload contains expected data'));
 
+// status codes
+
+define('CREATED',201);
+define('BAD_REQUEST',400);
+define('NOT_FOUND',404);
+
 
 ?>
