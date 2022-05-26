@@ -42,6 +42,8 @@ vanilla php (with pdo) + mysql api for a todo application
 - [x] .env
 - [x] error handling
 
+- [x] composer
+
 ## Tips
 
 [how to design better apis](https://r.bluethl.net/how-to-design-better-apis)  
