@@ -103,9 +103,9 @@ class Todo extends Database {
         $stmt->bindParam(':task', $task);
 
         if($stmt->execute()) 
-            return array('ok' => true, 'message' => 'todo was successfully added');
-        else
-            return array('ok' => false, 'message' => 'failed to add todo');
+            return TODO_SUCCESSFULLY_CREATED;
+        else 
+            return FAILED_TO_ADD_TODO;
     }
 
      /**
@@ -127,9 +127,9 @@ class Todo extends Database {
         $stmt->bindParam(':id', $id);
 
         if($stmt->execute())
-            return array('ok' => true, 'message' => 'todo was successfully deleted');
+            return SUCCESSFULLY_DELETED;
         else{
-            return array('ok' => false, 'message' => 'failed to delete todo');
+            return FAILED_TO_DELETE;
         }
     }
   
@@ -153,10 +153,12 @@ class Todo extends Database {
         $stmt->bindParam(':task', $task);
         $stmt->bindParam(':status', $status);
 
-        if($stmt->execute())
-            return array('ok' => true, 'message' => 'todo was successfully updated');
+        if($stmt->execute()){
+            setResponseCode(CREATED);
+            return TODO_SUCCESSFULLY_UPDATED;
+        }
         else
-            return array('ok' => false, 'message' => 'failed to update todo');
+            return FAILED_TO_UPDATE_TODO;
     }
 
 }

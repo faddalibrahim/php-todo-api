@@ -30,13 +30,19 @@ vanilla php (with pdo) + mysql api for a todo application
 | ------ | -------------------------------------------- |
 | /todos | delete todo with corresponding id in payload |
 
-## Important checklists
+## Checklists
 
 - [x] versioning
 - [x] health route
+
+- [x] status codes
+- [x] autoloader
+- [x] swagger docs
+- [x] .htaccess file
+- [x] error handling
 
 ## Tips
 
 [how to design better apis](https://r.bluethl.net/how-to-design-better-apis)  
 [php proper documentation](https://flaviocopes.com/php-proper-documentation/)  
-[document apis](https://app.swaggerhub.com/home)
+[document with swagger](https://app.swaggerhub.com/home)

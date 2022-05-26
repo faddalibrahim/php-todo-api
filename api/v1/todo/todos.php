@@ -9,11 +9,13 @@
 
 require_once(__DIR__."/../../../util/headers.util.php");
 
-require_once(__DIR__."/../../../controller/Todo.controller.php");
+require_once(__DIR__."/../../../util/constants.util.php");
 
 require_once(__DIR__."/../../../util/functions.util.php");
 
-require_once(__DIR__."/../../../util/constants.util.php");
+require_once(__DIR__."/../../../controller/Todo.controller.php");
+
+
 
 
 // GET REQUESTS
@@ -46,16 +48,18 @@ if(isPostRequest()){
 
     // check if payload is empty
     if(!$payload) {
-        http_response_code(400);
-        exit(json_encode(EMPTY_PAYLOAD));
+        setResponseCode(BAD_REQUEST);
+        sendResponse(EMPTY_PAYLOAD);
     }
     
+    
+    // contains unexpected keys
+    if(!array_key_exists(TASK, $payload)) {
+        setResponseCode(BAD_REQUEST);
+        sendResponse(UNEXPECTED_PAYLOAD);
+    }
 
-    // contains expected keys
-    if(!array_key_exists(TASK, $payload)) exit(json_encode(UNEXPECTED_PAYLOAD));
 
-
-    http_response_code(201);
     sendResponse(createTodo($payload[TASK]));
 }
 
@@ -67,15 +71,14 @@ if(isDeleteRequest()){
 
     // check if payload is empty
     if(!$payload) {
-        http_response_code(400);
-        exit(json_encode(EMPTY_PAYLOAD));
+        setResponseCode(BAD_REQUEST);
+        sendResponse(EMPTY_PAYLOAD);
     }
     
     // contains expected keys/values
     if(!array_key_exists(ID, $payload) or !is_numeric($payload[ID])) {
-        // bad request
-        http_response_code(400);
-        exit(json_encode(UNEXPECTED_PAYLOAD));
+        setResponseCode(BAD_REQUEST);
+        sendResponse(UNEXPECTED_PAYLOAD);
     }
     
 
@@ -87,7 +90,17 @@ if(isDeleteRequest()){
 if(isPutRequest()){
     $payload = getPayload();
     
-    http_response_code(201);
+    // check if payload is empty
+    if(!$payload) {
+        setResponseCode(BAD_REQUEST);
+        sendResponse(EMPTY_PAYLOAD);
+    }
+
+    if(!array_key_exists(ID, $payload) or !is_numeric($payload[ID])) {
+        setResponseCode(BAD_REQUEST);
+        sendResponse(UNEXPECTED_PAYLOAD);
+    }
+    
     sendResponse(updateTodo($payload[ID], $payload[TASK], $payload[STATUS]));
 
 }

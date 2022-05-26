@@ -4,9 +4,16 @@ require_once(__DIR__."/../model/Todo.model.php");
 
 function getAllTodos(){
     $todo = new Todo();
-    $stmt = $todo->getAllTodos();
 
-    if (!$stmt->rowCount()) return array('ok' => false, 'data' => array());
+    try{
+        $stmt = $todo->getAllTodos();
+    }catch(Exception $e){
+        setResponseCode(INTERNAL_SERVER_ERROR);
+        return SOMETHING_WENT_WRONG;
+    }
+
+
+    if (!$stmt->rowCount()) return EMPTY_RESULT;
 
     $all_todos = array('ok' => true, 'todos' => array());
 
@@ -19,21 +26,24 @@ function getAllTodos(){
             'status' => $status,
             'created_at' => $created_at
         );
-
+        
         array_push($all_todos['todos'],$todo);
     }
-
+    
     return array('data' => $all_todos);
 }
 
 function getTodo($id){
     $todo = new Todo();
-    $stmt = $todo->getTodo($id);
-
-    if (!$stmt->rowCount()) {
-        http_response_code(404);
-        return array('ok' => false, 'message' => "no such todo");
+    
+    try{
+        $stmt = $todo->getTodo($id);
+    }catch(Exception $e){
+        setResponseCode(INTERNAL_SERVER_ERROR);
+        return SOMETHING_WENT_WRONG;
     }
+
+    if (!$stmt->rowCount()) return EMPTY_RESULT;
 
     $todo = array('ok' => true, 'todo' => null);
 
@@ -55,12 +65,15 @@ function getTodo($id){
 
 function searchTodos($param){
     $todo = new Todo();
-    $stmt = $todo->searchTodos($param);
-
-    if (!$stmt->rowCount()) {
-        http_response_code(404);
-        return array('ok' => false, 'data' => array());
+    
+    try{
+        $stmt = $todo->searchTodos($param);
+    }catch(Exception $e){
+        setResponseCode(INTERNAL_SERVER_ERROR);
+        return SOMETHING_WENT_WRONG;
     }
+
+    if (!$stmt->rowCount()) return EMPTY_RESULT;
 
     $resulting_todos = array('ok' => true, 'todos' => array());
 
@@ -84,8 +97,15 @@ function searchTodos($param){
 function createTodo($task){
 
     $todo = new Todo();
-    $result = $todo->createTodo($task);
+    
+    try{
+        $result = $todo->createTodo($task);
+    }catch(Exception $e){
+        setResponseCode(INTERNAL_SERVER_ERROR);
+        return SOMETHING_WENT_WRONG;
+    }
 
+    setResponseCode(CREATED);
     return $result;
 
 }
@@ -93,14 +113,27 @@ function createTodo($task){
 function deleteTodo($id){
 
     $todo = new Todo();
-    $result = $todo->deleteTodo($id);
+
+    try{
+        $result = $todo->deleteTodo($id);
+    }catch(Exception $e){
+        setResponseCode(INTERNAL_SERVER_ERROR);
+        return SOMETHING_WENT_WRONG;
+    }
+
 
     return $result;
 }
 
 function updateTodo($id, $task, $status){
     $todo = new todo();
-    $result = $todo->updateTodo($id, $task, $status);
+    
+    try{
+        $result = $todo->updateTodo($id, $task, $status);
+    }catch(Exception $e){
+        setResponseCode(INTERNAL_SERVER_ERROR);
+        return SOMETHING_WENT_WRONG;
+    }
 
     return $result;
 }
