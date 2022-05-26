@@ -3,7 +3,7 @@ CREATE DATABASE `todo`;
 USE `todo`;
 
 -- TABLES
-CREATE TABLE todo (
+CREATE TABLE IF NOT EXISTS `todo` (
     id INT AUTO_INCREMENT PRIMARY KEY,
     task VARCHAR(255) NOT NULL,
     status ENUM('done','pending') NOT NULL DEFAULT 'pending',
