@@ -16,7 +16,7 @@ function getPayload(){
  * @return boolean true or false
  */
 
-function isGetRequest() { 
+function isGetRequest() : bool { 
     return $_SERVER[REQUEST_METHOD] === GET;
 }
 
@@ -26,7 +26,7 @@ function isGetRequest() {
  * @return boolean true or false
  */
 
-function isPostRequest() { 
+function isPostRequest() : bool { 
     return $_SERVER[REQUEST_METHOD] === POST;
 }
 
@@ -36,7 +36,7 @@ function isPostRequest() {
  * @return boolean true or false
  */
 
-function isPutRequest() { 
+function isPutRequest() : bool { 
     return $_SERVER[REQUEST_METHOD] === PUT;
 }
 
@@ -46,7 +46,7 @@ function isPutRequest() {
  * @return boolean true or false
  */
 
-function isDeleteRequest() { 
+function isDeleteRequest() : bool { 
     return $_SERVER[REQUEST_METHOD] === DELETE;
 }
 
@@ -56,7 +56,7 @@ function isDeleteRequest() {
  * @param array { response } the response to be sent to the client
  */
 
-function sendResponse(array $response):void{
+function sendResponse(array $response) : void{
     exit(json_encode($response));
 }
 
@@ -66,7 +66,7 @@ function sendResponse(array $response):void{
  * @param int { code } the response code
  */
 
-function setResponseCode(int $code):void{
+function setResponseCode(int $code) : void{
     http_response_code($code);
 }
 
